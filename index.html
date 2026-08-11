@@ -1638,61 +1638,61 @@
         //  ГЕНЕРАЦИЯ DOC С ВСТРАИВАНИЕМ ФОТО (исправленная версия)
         // ================================================================
         (function() {
-            "use strict";
+    "use strict";
 
-            const PHOTO_URL = "https://i.ibb.co/4Zzj0y7m/photo.jpg";
-            const PHOTO_LOC = "https://i.ibb.co/4Zzj0y7m/photo.jpg";
+    const PHOTO_URL = "https://i.ibb.co/4Zzj0y7m/photo.jpg";
+    const PHOTO_LOC = "https://i.ibb.co/4Zzj0y7m/photo.jpg";
 
-            // ---- Получение данных резюме (без изменений) ----
-            function getDocData(lang) {
-                const d = window.data;
-                if (!d) return null;
+    // ---- Получение данных резюме (без изменений) ----
+    function getDocData(lang) {
+        const d = window.data;
+        if (!d) return null;
 
-                const contacts = {
-                    phone: d.contacts?.phone || "",
-                    email: d.contacts?.email || "",
-                    location: d.contacts?.location?.[lang] || d.contacts?.location?.en || ""
-                };
+        const contacts = {
+            phone: d.contacts?.phone || "",
+            email: d.contacts?.email || "",
+            location: d.contacts?.location?.[lang] || d.contacts?.location?.en || ""
+        };
 
-                const skills = (d.skills || []).map(s => [s, ""]);
+        const skills = (d.skills || []).map(s => [s, ""]);
 
-                const eduText = d.education?.[lang] || d.education?.en || "";
-                const education = [{ t: eduText, d: "", p: "" }];
+        const eduText = d.education?.[lang] || d.education?.en || "";
+        const education = [{ t: eduText, d: "", p: "" }];
 
-                const experience = (d.experience || []).map(exp => ({
-                    t: exp.title?.[lang] || exp.title?.en || "",
-                    c: exp.company || "",
-                    d: exp.period?.[lang] || exp.period?.en || "",
-                    b: (exp.details || []).map(det => det[lang] || det.en || "")
-                }));
+        const experience = (d.experience || []).map(exp => ({
+            t: exp.title?.[lang] || exp.title?.en || "",
+            c: exp.company || "",
+            d: exp.period?.[lang] || exp.period?.en || "",
+            b: (exp.details || []).map(det => det[lang] || det.en || "")
+        }));
 
-                const languages = [
-                    [lang === 'ru' ? "Русский" : lang === 'cn' ? "Руски" : "Russian", 100],
-                    [lang === 'ru' ? "Английский" : lang === 'cn' ? "Енглески" : "English", 80]
-                ];
+        const languages = [
+            [lang === 'ru' ? "Русский" : lang === 'cn' ? "Руски" : "Russian", 100],
+            [lang === 'ru' ? "Английский" : lang === 'cn' ? "Енглески" : "English", 80]
+        ];
 
-                const L = {
-                    profile:  lang === 'ru' ? "Обо мне" : lang === 'cn' ? "О мени" : "Profile",
-                    skills:   lang === 'ru' ? "Ключевые навыки" : lang === 'cn' ? "Кључне вјештине" : "Core Skills",
-                    education:lang === 'ru' ? "Образование" : lang === 'cn' ? "Образовање" : "Education",
-                    languages:lang === 'ru' ? "Языки" : lang === 'cn' ? "Језици" : "Languages",
-                    experience:lang === 'ru' ? "Опыт работы" : lang === 'cn' ? "Искуство" : "Work Experience"
-                };
+        const L = {
+            profile:  lang === 'ru' ? "Обо мне" : lang === 'cn' ? "О мени" : "Profile",
+            skills:   lang === 'ru' ? "Ключевые навыки" : lang === 'cn' ? "Кључне вјештине" : "Core Skills",
+            education:lang === 'ru' ? "Образование" : lang === 'cn' ? "Образовање" : "Education",
+            languages:lang === 'ru' ? "Языки" : lang === 'cn' ? "Језици" : "Languages",
+            experience:lang === 'ru' ? "Опыт работы" : lang === 'cn' ? "Искуство" : "Work Experience"
+        };
 
-                return {
-                    name:      "Anastasia Makarova",
-                    position:  lang === 'ru' ? "Обслуживание · Гостеприимство" :
-                               lang === 'cn' ? "Корисничка служба · Хотелијерство" :
-                               "Customer Service · Hospitality",
-                    contacts:  contacts,
-                    about:     d.about?.[lang] || d.about?.en || "",
-                    skills:    skills,
-                    education: education,
-                    experience:experience,
-                    languages: languages,
-                    L: L
-                };
-            }
+        return {
+            name:      "Anastasia Makarova",
+            position:  lang === 'ru' ? "Обслуживание · Гостеприимство" :
+                       lang === 'cn' ? "Корисничка служба · Хотелијерство" :
+                       "Customer Service · Hospitality",
+            contacts:  contacts,
+            about:     d.about?.[lang] || d.about?.en || "",
+            skills:    skills,
+            education: education,
+            experience:experience,
+            languages: languages,
+            L: L
+        };
+    }
 
             // ---- Построение HTML для документа (без изменений) ----
             function buildDocHTML(d, photoSrc) {
